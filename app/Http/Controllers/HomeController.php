@@ -23,11 +23,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $totalFactures = \App\Models\Facture::count();
-        $totalClients = \App\Models\Client::count();
-        $totalEmetteurs = \App\Models\Emetteur::count();
-        $totalMontant = \App\Models\Facture::sum('total_ttc');
+        $user = auth()->user();
+        
+        if ($user->isAdmin()) {
+            // Admin dashboard
+            $totalUsers = \App\Models\User::count();
+            $totalFactures = \App\Models\Facture::count();
+            $totalClients = \App\Models\Client::count();
+            $totalMontant = \App\Models\Facture::sum('montant_total');
 
-        return view('dashboard', compact('totalFactures', 'totalClients', 'totalEmetteurs', 'totalMontant'));
+            return view('admin.dashboard', compact('totalUsers', 'totalFactures', 'totalClients', 'totalMontant'));
+        } else {
+            // User dashboard
+            $totalFactures = \App\Models\Facture::where('user_id', $user->id)->count();
+            $totalClients = \App\Models\Client::where('user_id', $user->id)->count();
+            $totalEmetteurs = \App\Models\Emetteur::where('user_id', $user->id)->count();
+            $totalMontant = \App\Models\Facture::where('user_id', $user->id)->sum('montant_total');
+
+            return view('user.dashboard', compact('totalFactures', 'totalClients', 'totalEmetteurs', 'totalMontant'));
+        }
     }
 }
