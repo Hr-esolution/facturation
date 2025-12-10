@@ -10,6 +10,7 @@ class Facture extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'numero_facture',
         'emetteur_id',
         'client_id',
@@ -38,5 +39,10 @@ class Facture extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

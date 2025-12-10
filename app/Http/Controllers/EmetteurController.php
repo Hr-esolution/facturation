@@ -14,7 +14,7 @@ class EmetteurController extends Controller
      */
     public function index()
     {
-        $emetteurs = Emetteur::paginate(10);
+        $emetteurs = Emetteur::where('user_id', auth()->id())->paginate(10);
         return view('emetteurs.index', compact('emetteurs'));
     }
 
@@ -48,7 +48,7 @@ class EmetteurController extends Controller
             'type' => 'nullable|string|max:50',
         ]);
 
-        Emetteur::create($request->all());
+        Emetteur::create(array_merge($request->all(), ['user_id' => auth()->id()]));
 
         return redirect()->route('emetteurs.index')->with('success', 'Émetteur créé avec succès.');
     }
@@ -61,6 +61,11 @@ class EmetteurController extends Controller
      */
     public function show(Emetteur $emetteur)
     {
+        // Authorization: user can only view their own emetteurs
+        if ($emetteur->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
+            abort(403, 'Unauthorized access');
+        }
+        
         return view('emetteurs.show', compact('emetteur'));
     }
 
@@ -72,6 +77,11 @@ class EmetteurController extends Controller
      */
     public function edit(Emetteur $emetteur)
     {
+        // Authorization: user can only edit their own emetteurs
+        if ($emetteur->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
+            abort(403, 'Unauthorized access');
+        }
+        
         return view('emetteurs.edit', compact('emetteur'));
     }
 
@@ -84,6 +94,11 @@ class EmetteurController extends Controller
      */
     public function update(Request $request, Emetteur $emetteur)
     {
+        // Authorization: user can only update their own emetteurs
+        if ($emetteur->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
+            abort(403, 'Unauthorized access');
+        }
+        
         $request->validate([
             'nom' => 'required|string|max:255',
             'prenom' => 'nullable|string|max:255',
@@ -109,6 +124,11 @@ class EmetteurController extends Controller
      */
     public function destroy(Emetteur $emetteur)
     {
+        // Authorization: user can only delete their own emetteurs
+        if ($emetteur->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
+            abort(403, 'Unauthorized access');
+        }
+        
         $emetteur->delete();
 
         return redirect()->route('emetteurs.index')->with('success', 'Émetteur supprimé avec succès.');

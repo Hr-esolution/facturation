@@ -10,6 +10,7 @@ class Emetteur extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'nom',
         'prenom',
         'entreprise',
@@ -41,5 +42,10 @@ class Emetteur extends Model
     public function factures()
     {
         return $this->hasMany(Facture::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
