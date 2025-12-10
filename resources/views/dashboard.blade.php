@@ -152,19 +152,31 @@
         
         <div class="col-lg-4 mb-4">
             <div class="glass-card p-4">
-                <h4 class="text-white mb-4">Actions rapides</h4>
+                <h4 class="text-white mb-4">Menu Principal</h4>
                 <div class="d-grid gap-2">
-                    <a href="{{ route('factures.create') }}" class="btn-glass btn-primary-glass">
-                        <i class="fas fa-plus mr-2"></i> Nouvelle facture
+                    <!-- Mon Entreprise (Émetteurs) -->
+                    <a href="{{ route('emetteurs.index') }}" class="btn-glass btn-primary-glass">
+                        <i class="fas fa-building mr-2"></i> Mon Entreprise
                     </a>
+                    
+                    <!-- Mes Documents (Factures) -->
                     <a href="{{ route('factures.index') }}" class="btn-glass">
-                        <i class="fas fa-list mr-2"></i> Voir les factures
+                        <i class="fas fa-file-invoice mr-2"></i> Mes Documents
                     </a>
+                    
+                    <!-- Mes Clients -->
+                    <a href="{{ route('clients.index') }}" class="btn-glass">
+                        <i class="fas fa-users mr-2"></i> Mes Clients
+                    </a>
+                    
+                    <!-- Paramètres Factures -->
                     <a href="{{ route('facture-parametres.index') }}" class="btn-glass">
-                        <i class="fas fa-cog mr-2"></i> Paramètres
+                        <i class="fas fa-cogs mr-2"></i> Paramètres Factures
                     </a>
-                    <a href="{{ route('admin.facture-templates.index') }}" class="btn-glass">
-                        <i class="fas fa-file-alt mr-2"></i> Templates
+                    
+                    <!-- Champs Factures -->
+                    <a href="{{ route('admin.facture-champs.index') }}" class="btn-glass">
+                        <i class="fas fa-edit mr-2"></i> Champs Factures
                     </a>
                 </div>
             </div>
