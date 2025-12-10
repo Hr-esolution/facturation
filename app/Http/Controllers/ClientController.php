@@ -14,7 +14,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::paginate(10);
+        $clients = Client::where('user_id', auth()->id())->paginate(10);
         return view('clients.index', compact('clients'));
     }
 
@@ -47,7 +47,7 @@ class ClientController extends Controller
             'pays' => 'nullable|string|max:255',
         ]);
 
-        Client::create($request->all());
+        Client::create(array_merge($request->all(), ['user_id' => auth()->id()]));
 
         return redirect()->route('clients.index')->with('success', 'Client créé avec succès.');
     }
@@ -60,6 +60,11 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
+        // Authorization: user can only view their own clients
+        if ($client->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
+            abort(403, 'Unauthorized access');
+        }
+        
         return view('clients.show', compact('client'));
     }
 
@@ -71,6 +76,11 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
+        // Authorization: user can only edit their own clients
+        if ($client->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
+            abort(403, 'Unauthorized access');
+        }
+        
         return view('clients.edit', compact('client'));
     }
 
@@ -83,6 +93,11 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
+        // Authorization: user can only update their own clients
+        if ($client->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
+            abort(403, 'Unauthorized access');
+        }
+        
         $request->validate([
             'nom' => 'required|string|max:255',
             'prenom' => 'nullable|string|max:255',
@@ -107,6 +122,11 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
+        // Authorization: user can only delete their own clients
+        if ($client->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
+            abort(403, 'Unauthorized access');
+        }
+        
         $client->delete();
 
         return redirect()->route('clients.index')->with('success', 'Client supprimé avec succès.');

@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $totalFactures = \App\Models\Facture::count();
+        $totalClients = \App\Models\Client::count();
+        $totalEmetteurs = \App\Models\Emetteur::count();
+        $totalMontant = \App\Models\Facture::sum('total_ttc');
+
+        return view('dashboard', compact('totalFactures', 'totalClients', 'totalEmetteurs', 'totalMontant'));
     }
 }
