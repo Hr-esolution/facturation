@@ -12,17 +12,6 @@
 
         <!-- Styles -->
         <style>
-            :root {
-                /* Pantone 2025 Colors */
-                --pantone-2025-pepper-coral: #FF6B6B;
-                --pantone-2025-ashen-aqua: #88BDBC;
-                --pantone-2025-sweet-creme: #F9E7E1;
-                --pantone-2025-slate-green: #6B8E8A;
-                --pantone-2025-bright-amber: #F9C74F;
-                --pantone-2025-deep-forest: #277DA1;
-                --pantone-2025-soft-mint: #90BE6D;
-            }
-            
             body {
                 margin: 0;
                 padding: 0;
@@ -33,82 +22,6 @@
                     var(--pantone-2025-slate-green) 100%);
                 font-family: 'Figtree', sans-serif;
                 overflow-x: hidden;
-            }
-            
-            .glass-container {
-                background: rgba(255, 255, 255, 0.15);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.18);
-                border-radius: 20px;
-                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            }
-            
-            .glass-card {
-                background: rgba(255, 255, 255, 0.25);
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-                border: 1px solid rgba(255, 255, 255, 0.18);
-                border-radius: 16px;
-                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
-            }
-            
-            .btn-glass {
-                background: rgba(255, 255, 255, 0.25);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.18);
-                border-radius: 12px;
-                padding: 12px 24px;
-                color: #333;
-                text-decoration: none;
-                transition: all 0.3s ease;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                gap: 8px;
-            }
-            
-            .btn-glass:hover {
-                background: rgba(255, 255, 255, 0.35);
-                transform: translateY(-2px);
-                box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-            }
-            
-            .btn-primary {
-                background: linear-gradient(135deg, var(--pantone-2025-pepper-coral), var(--pantone-2025-bright-amber));
-                color: white !important;
-                border: none;
-            }
-            
-            .btn-secondary {
-                background: linear-gradient(135deg, var(--pantone-2025-ashen-aqua), var(--pantone-2025-slate-green));
-                color: white !important;
-                border: none;
-            }
-            
-            .btn-success {
-                background: linear-gradient(135deg, var(--pantone-2025-soft-mint), var(--pantone-2025-deep-forest));
-                color: white !important;
-                border: none;
-            }
-            
-            .feature-card {
-                transition: all 0.3s ease;
-                border-radius: 16px;
-                overflow: hidden;
-            }
-            
-            .feature-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            }
-            
-            .text-gradient {
-                background: linear-gradient(135deg, var(--pantone-2025-pepper-coral), var(--pantone-2025-bright-amber));
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
             }
         </style>
     </head>
@@ -160,7 +73,7 @@
                         </div>
                         <h3 class="text-xl font-semibold text-white mb-4">Clients</h3>
                         <p class="text-white/80 mb-6">Gérez vos clients et leurs informations de facturation</p>
-                        <a href="#" class="btn-glass btn-secondary w-full">Accéder aux clients</a>
+                        <a href="{{ route('clients.index') }}" class="btn-glass btn-secondary w-full">Accéder aux clients</a>
                     </div>
 
                     <div class="glass-card p-8 text-center feature-card">
@@ -171,7 +84,7 @@
                         </div>
                         <h3 class="text-xl font-semibold text-white mb-4">Émetteurs</h3>
                         <p class="text-white/80 mb-6">Configurez les émetteurs et leurs paramètres</p>
-                        <a href="#" class="btn-glass btn-success w-full">Accéder aux émetteurs</a>
+                        <a href="{{ route('emetteurs.index') }}" class="btn-glass btn-success w-full">Accéder aux émetteurs</a>
                     </div>
 
                     <div class="glass-card p-8 text-center feature-card">

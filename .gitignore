@@ -6,21 +6,25 @@ __pycache__/
 *.obj
 dist/
 build/
-coverage/
-htmlcov/
-.coverage
+*.class
+*.exe
+*.dll
+*.so
+*.a
+*.out
 
 # Dependencies
 vendor/
 node_modules/
 .env
 .env.local
-*.env.*
+.env.*
 
 # Logs and temp files
 *.log
 *.tmp
 *.swp
+*.swo
 
 # Editors
 .vscode/
@@ -30,18 +34,27 @@ node_modules/
 .DS_Store
 Thumbs.db
 
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Package manager cache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
 # Laravel specific
-/storage/logs/*
-/public/storage
-/bootstrap/cache/*
-!.gitkeep
+bootstrap/cache/
+storage/framework/cache/
+storage/logs/
+public/storage
 
-# Database
-*.db
-*.sqlite
-*.sqlite3
+# PHP specific
+*.php~
+.htaccess
 
-# Archives
+# Compression files
 *.zip
 *.gz
 *.tar
