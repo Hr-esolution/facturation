@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FactureController;
 use App\Http\Controllers\FactureParametreController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\EmetteurController;
 use App\Http\Controllers\Admin\FactureTemplateController;
 use App\Http\Controllers\Admin\FactureChampController;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +35,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('factures', FactureController::class)->middleware('auth');
 Route::get('factures/{facture}/pdf', [FactureController::class, 'generatePDF'])->name('factures.pdf')->middleware('auth');
 Route::post('factures/{facture}/send-email', [FactureController::class, 'sendByEmail'])->name('factures.send-email')->middleware('auth');
+
+// Routes pour les clients
+Route::resource('clients', ClientController::class)->middleware('auth');
+
+// Routes pour les émetteurs
+Route::resource('emetteurs', EmetteurController::class)->middleware('auth');
 
 // Routes pour les paramètres de facturation
 Route::resource('facture-parametres', FactureParametreController::class)->middleware('auth');
