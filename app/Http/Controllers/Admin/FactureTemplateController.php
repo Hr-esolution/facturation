@@ -15,7 +15,7 @@ class FactureTemplateController extends Controller
     public function index()
     {
         $templates = FactureTemplate::all();
-        return view('admin.templates.index', compact('templates'));
+        return view('admin.facture-templates.index', compact('templates'));
     }
 
     /**
@@ -23,7 +23,7 @@ class FactureTemplateController extends Controller
      */
     public function create()
     {
-        return view('admin.templates.create');
+        return view('admin.facture-templates.create');
     }
 
     /**
@@ -64,7 +64,7 @@ class FactureTemplateController extends Controller
      */
     public function show(FactureTemplate $template)
     {
-        return view('admin.templates.show', compact('template'));
+        return view('admin.facture-templates.show', compact('template'));
     }
 
     /**
@@ -72,7 +72,7 @@ class FactureTemplateController extends Controller
      */
     public function edit(FactureTemplate $template)
     {
-        return view('admin.templates.edit', compact('template'));
+        return view('admin.facture-templates.edit', compact('template'));
     }
 
     /**

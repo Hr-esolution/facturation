@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ClientSeeder::class,
             EmetteurSeeder::class,
+            FactureChampSeeder::class,
             FactureParametreSeeder::class,
             FactureTemplateSeeder::class,
             FactureSeeder::class,
