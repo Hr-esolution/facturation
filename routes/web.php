@@ -42,10 +42,19 @@ Route::resource('clients', ClientController::class)->middleware('auth');
 // Routes pour les émetteurs
 Route::resource('emetteurs', EmetteurController::class)->middleware('auth');
 
+// Routes pour les produits
+Route::resource('products', ProductController::class)->middleware('auth');
+
 // Routes pour les paramètres de facturation
 Route::resource('facture-parametres', FactureParametreController::class)->middleware('auth');
-Route::get('facture-parametres/pays/{pays}', [FactureParametreController::class, 'getByPays'])->name('facture-parametres.pays')->middleware('auth');
-Route::get('facture-parametres/cle/{cle}', [FactureParametreController::class, 'getByCle'])->name('facture-parametres.cle')->middleware('auth');
+
+// Routes pour les paramètres généraux
+Route::prefix('settings')->name('settings.')->middleware('auth')->group(function () {
+    Route::get('/', [SettingController::class, 'index'])->name('index');
+    Route::post('signature', [SettingController::class, 'updateSignature'])->name('update.signature');
+    Route::post('email-partage', [SettingController::class, 'updateEmailPartage'])->name('update.email-partage');
+    Route::post('logo', [SettingController::class, 'updateLogo'])->name('update.logo');
+});
 
 // Routes admin pour les templates et champs
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
