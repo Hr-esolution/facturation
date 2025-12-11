@@ -28,8 +28,20 @@ Route::get('/', function () {
 // Authentication routes
 Auth::routes();
 
-// Home route after login
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Home route after login - redirects to appropriate dashboard
+Route::get('/home', function () {
+    if (Auth::check()) {
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('dashboard');
+        }
+    }
+    return redirect()->route('login');
+})->name('home');
+
+// User dashboard route
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard')->middleware('auth');
 
 // Routes pour les factures
 Route::resource('factures', FactureController::class)->middleware('auth');
@@ -58,6 +70,10 @@ Route::prefix('settings')->name('settings.')->middleware('auth')->group(function
 
 // Routes admin pour les templates et champs
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+    
     Route::resource('facture-templates', FactureTemplateController::class);
     Route::put('facture-templates/{template}/toggle-status', [FactureTemplateController::class, 'toggleStatus'])->name('facture-templates.toggle-status');
     Route::put('facture-templates/{template}/set-default', [FactureTemplateController::class, 'setAsDefault'])->name('facture-templates.set-default');
