@@ -15,7 +15,7 @@ class FactureChampController extends Controller
     public function index()
     {
         $champs = FactureChamp::all();
-        return view('admin.champs.index', compact('champs'));
+        return view('admin.facture-champs.index', compact('champs'));
     }
 
     /**
@@ -23,7 +23,7 @@ class FactureChampController extends Controller
      */
     public function create()
     {
-        return view('admin.champs.create');
+        return view('admin.facture-champs.create');
     }
 
     /**
@@ -66,7 +66,7 @@ class FactureChampController extends Controller
      */
     public function show(FactureChamp $champ)
     {
-        return view('admin.champs.show', compact('champ'));
+        return view('admin.facture-champs.show', compact('champ'));
     }
 
     /**
@@ -74,7 +74,7 @@ class FactureChampController extends Controller
      */
     public function edit(FactureChamp $champ)
     {
-        return view('admin.champs.edit', compact('champ'));
+        return view('admin.facture-champs.edit', compact('champ'));
     }
 
     /**

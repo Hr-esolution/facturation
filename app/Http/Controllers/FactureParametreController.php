@@ -14,7 +14,7 @@ class FactureParametreController extends Controller
     public function index()
     {
         $parametres = FactureParametre::all();
-        return view('parametres.index', compact('parametres'));
+        return view('facture-parametres.index', compact('parametres'));
     }
 
     /**
@@ -22,7 +22,7 @@ class FactureParametreController extends Controller
      */
     public function create()
     {
-        return view('parametres.create');
+        return view('facture-parametres.create');
     }
 
     /**
@@ -61,7 +61,7 @@ class FactureParametreController extends Controller
      */
     public function show(FactureParametre $parametre)
     {
-        return view('parametres.show', compact('parametre'));
+        return view('facture-parametres.show', compact('parametre'));
     }
 
     /**
@@ -69,7 +69,7 @@ class FactureParametreController extends Controller
      */
     public function edit(FactureParametre $parametre)
     {
-        return view('parametres.edit', compact('parametre'));
+        return view('facture-parametres.edit', compact('parametre'));
     }
 
     /**
