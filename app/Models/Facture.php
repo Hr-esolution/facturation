@@ -16,19 +16,18 @@ class Facture extends Model
         'client_id',
         'date_emission',
         'date_echeance',
-        'produits',
         'total_ht',
         'total_tva',
         'total_ttc',
         'statut',
         'mode_paiement',
         'pays_client',
+        'template_id',
     ];
 
     protected $casts = [
         'date_emission' => 'date',
         'date_echeance' => 'date',
-        'produits' => 'array',
     ];
 
     public function emetteur()
@@ -44,5 +43,17 @@ class Facture extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function produits()
+    {
+        return $this->belongsToMany(Product::class, 'facture_produits')
+                    ->withPivot('quantite', 'prix_unitaire', 'taxe', 'sous_total')
+                    ->withTimestamps();
+    }
+
+    public function template()
+    {
+        return $this->belongsTo(FactureTemplate::class);
     }
 }
